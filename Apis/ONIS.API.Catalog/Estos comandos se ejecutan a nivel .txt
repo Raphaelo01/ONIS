@@ -1,0 +1,21 @@
+Estos comandos se ejecutan a nivel proyecto
+paso 1
+dotnet restore
+paso 2
+dotnet publish -c Release -o out
+paso 3 ejecutamos desde terminal la aplicacion
+dotnet out/nombreAplicacion.dll
+
+
+
+,
+      "Endpoints": {
+        "Http": {
+          "Url": "http://localhost:5000"
+        },
+        "Https": {
+          "Url": "https://localhost:5001"
+        }
+      }
+
+lez\source\repos\ONIS\Apis\ONIS.API.Catalog> dotnet run environment=Development --project onis.api.catalog --launch-profile https

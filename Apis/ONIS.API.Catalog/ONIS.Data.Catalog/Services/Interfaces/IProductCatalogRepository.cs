@@ -1,6 +1,6 @@
 ﻿namespace ONIS.Data.Catalog.Services.Interfaces;
 
-public interface IProductCatalogRepository
+public interface IProductCatalogRepository : IUnitOfWork
 {
     Task<IEnumerable<ProductDTO>> GetProductsAsync();
 

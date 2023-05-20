@@ -1,6 +1,6 @@
 ﻿namespace ONIS.Data.Catalog.Services.Repositories;
 
-public class ProductCatalogRepository : IProductCatalogRepository, IUnitOfWork
+public class ProductCatalogRepository : IProductCatalogRepository
 {
     private readonly CatalogDbContext _context;
     public ProductCatalogRepository(CatalogDbContext context)

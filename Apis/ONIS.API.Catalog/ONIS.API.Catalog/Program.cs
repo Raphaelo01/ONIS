@@ -7,18 +7,17 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-
 var app = builder.Build();
-//builder.WebHost.UseUrls("http://localhost:5024", "https://localhost:5025");
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+//if (app.Environment.IsDevelopment())
+//{
+//Uso estas lineas porque no he podido configurar los ambientes en docker, pero los eliminare cuando ya este pasando a pasos de produccion
 app.UseSwagger();
 app.UseSwaggerUI();
+//}
+
+//Agregar HealthChecks
 
 app.UseHttpsRedirection();
 

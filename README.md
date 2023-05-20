@@ -14,7 +14,6 @@
 - SQL Server for Linux 2019
 - MongoDB
 - Elasticsearch
-- MySQL 8
 
 ## Prerequisites
 
@@ -22,21 +21,25 @@
 
 ## Installation
 
-  - Run docker-compose
-  -   To start services use docker-compose up -d 
-  -   To stop services use docker compose down  
-  - Run Dockerfile
-  
+  - To use Docker via Windows/Mac/Linux visit https://docs.docker.com/engine/install/
+  - To execute via Docker follow Usage secction
 
 ## Usage
 
-- use http://localhost:9000/streams to access grylog page
-- user and password: admin
-- go to System-Inputs
-- on Inputs select GELF UDP then Launch
+- Run docker-compose
+-   To start services use docker-compose up -d 
+-   To stop services use docker compose down  
+
+- Configure and use Serilog  
+- Use http://localhost:9000/streams to access grylog page
+- User and password: admin
+- Go to System-Inputs
+- On Inputs select GELF UDP then Launch
 - Just modify Title adding for example SerilogAPI 
-- at this moment when you ask endpoint getallProducts, the endpoint generate a simple message just at this moment for test
-- api EndPoint https://localhost:44368/swagger/index.html
+- At this moment when you ask endpoint getallProducts, the endpoint generate a simple message just at this moment for test
+
+- Use APIS
+- API Catalog EndPoint http://localhost:5102/Products/getallProducts
 
 
 

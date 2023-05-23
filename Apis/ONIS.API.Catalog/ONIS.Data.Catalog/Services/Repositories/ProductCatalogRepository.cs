@@ -1,4 +1,8 @@
-﻿namespace ONIS.Data.Catalog.Services.Repositories;
+﻿using ONIS.Shared.Base.DTOs;
+using ONIS.Shared.Base.DTOs.Interfaces;
+using ONIS.Shared.Base.DTOs.NullDTOs;
+
+namespace ONIS.Data.Catalog.Services.Repositories;
 
 public class ProductCatalogRepository : IProductCatalogRepository
 {
@@ -7,7 +11,7 @@ public class ProductCatalogRepository : IProductCatalogRepository
     {
         _context = context ?? throw new ArgumentNullException(nameof(context));
     }
-    public async Task<IEnumerable<ProductDTO>> GetProductsAsync()
+    public async Task<IEnumerable<IProductDTO>> GetAllAsync()
     {
         var result = await _context.Products.ToListAsync();
         return result.Select(p => new ProductDTO()
@@ -23,17 +27,16 @@ public class ProductCatalogRepository : IProductCatalogRepository
             PictureFileName = p.PictureFileName,
             PictureUri = p.PictureUri,
             RestockThreshold = p.RestockThreshold
-
         });
     }
-    public async Task<ProductDTO?> GetProductAsync(int employeeId)
+    public async Task<IProductDTO> GetAsync(int Id)
     {
-        var result = await _context.Products.FirstOrDefaultAsync(p => p.Id == employeeId);
+        var result = await _context.Products.FirstOrDefaultAsync(p => p.Id == Id);
         if (result == null)
-            return null;
+            return new NullProductDTO();
         return new ProductDTO()
         {
-            Name = result.Name,
+            Name = result.Name ?? "",
             Price = result.Price,
             AvailableStock = result.AvailableStock,
             CatalogBrandId = result.CatalogBrandId,
@@ -45,9 +48,35 @@ public class ProductCatalogRepository : IProductCatalogRepository
             PictureUri = result.PictureUri,
             RestockThreshold = result.RestockThreshold
         };
-
     }
-    public async Task AddProductAsync(ProductDTO product)
+    public async Task Delete(int Id)
+    {
+        var entity = await _context.Products.Where(p => p.Id == Id).FirstOrDefaultAsync();
+        if (entity != null)
+        {
+            _context.Products.Remove(entity);
+        }
+    }
+
+    public async Task UpdateAsync(int Id, IProductDTO product)
+    {
+        var productBase = await _context.Products.FirstOrDefaultAsync(p => p.Id == Id);
+        if (productBase != null)
+        {
+            productBase.Description = product.Description;
+            productBase.Price = product.Price;
+            productBase.AvailableStock = product.AvailableStock;
+            productBase.MaxStockThreshold = product.MaxStockThreshold;
+            productBase.Name = product.Name;
+            _context.Entry(productBase).State = EntityState.Modified;
+        }
+    }
+    public async Task SaveChangesAsync()
+    {
+        await _context.SaveChangesAsync();
+    }
+
+    public async Task Add(IProductDTO product)
     {
         // _context.Set<Product>().AddAsync(new produc)
         await _context.Products.AddAsync(new Product()
@@ -65,26 +94,6 @@ public class ProductCatalogRepository : IProductCatalogRepository
             RestockThreshold = product.RestockThreshold
         });
     }
-    public async Task DeleteProductAsync(int ProductId)
-    {
-        var entity = await _context.Products.Where(p => p.Id == ProductId).FirstOrDefaultAsync();
-        _context.Remove(entity);
-    }
-    public async Task UpdateProductAsync(int ProductId, ProductDTO Product)
-    {
-        var productBase = await _context.Products.FirstOrDefaultAsync(p => p.Id == ProductId);
-        productBase.Description = Product.Description;
-        productBase.Price = Product.Price;
-        productBase.AvailableStock = Product.AvailableStock;
-        productBase.MaxStockThreshold = Product.MaxStockThreshold;
-        productBase.Name = Product.Name;
-        _context.Entry(productBase).State = EntityState.Modified;
 
-
-    }
-    public async Task SaveChangesAsync()
-    {
-        await _context.SaveChangesAsync();
-    }
 }
 

@@ -1,0 +1,14 @@
+{
+  "users": [],
+  "vhosts": [
+    {
+      "name": "/"
+    }
+  ],
+  "permissions": [],
+  "parameters": [],
+  "policies": [],
+  "queues": [],
+  "exchanges":[],
+  "bindings": []
+}

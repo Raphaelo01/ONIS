@@ -8,7 +8,7 @@ services:
     container_name: ApiCatalog
     build:
       context: .
-      dockerfile: ONIS.API.Catalog/Dockerfile
+      dockerfile: ONIS.API.Catalog/Dockerfile.forCompose
     ports:
       - "5102:80"
       - "7006:443" #aun no he configurado el https
@@ -83,5 +83,21 @@ services:
   #############################
   # Graylog configuration end #
   #############################
+  #############################
+  # RabbitMQ configuration    #
+  #############################  
+  rabbitmq:
+    image: rabbitmq:3.8.34-management-alpine #management version needed to be able to have a User interface
+    container_name: rabbitmq
+    ports:
+        - 5672:5672
+        - 15672:15672
+    volumes: 
+        - ../volumens/rabbitmq/rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf
+        - ../volumens/rabbitmq/definitions.json:/etc/rabbitmq/definitions.json
+        - ../volumens/rabbitmq/enabled_plugins:/etc/rabbitmq/enabled_plugins
+  #############################
+  # RabbitMQ configuration end#
+  #############################  
        
       

@@ -5,14 +5,14 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 WORKDIR /src
-COPY ["ONIS.API.Catalog/ONIS.API.Catalog/ONIS.API.Catalog.csproj", "ONIS.API.Catalog/"]
+COPY ["ONIS.API.Catalog/ONIS.API.Catalog.csproj", "ONIS.API.Catalog/"]
 RUN dotnet restore "ONIS.API.Catalog/ONIS.API.Catalog.csproj"
 COPY . .
 WORKDIR "/src/ONIS.API.Catalog"
-RUN dotnet build "ONIS.API.Catalog/ONIS.API.Catalog.csproj" -c Release -o /app/build
+RUN dotnet build "ONIS.API.Catalog.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "ONIS.API.Catalog/ONIS.API.Catalog.csproj" -c Release -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "ONIS.API.Catalog.csproj" -c Release -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app

@@ -1,8 +1,12 @@
-﻿namespace ONIS.Bussines.Catalog.Interfaces;
+﻿using ONIS.Shared.Base.DTOs.Interfaces;
+using ONIS.Shared.Base.Helpers;
+
+namespace ONIS.Bussines.Catalog.Interfaces;
 public interface IProductService
 {
-    public ValueTask<IEnumerable<ProductDTO>> GetProducts();
-    public ValueTask<ProductDTO?> GetProductById(int id);
-    public ValueTask DeleteProduct(int ProductID);
-    public ValueTask UpdateProduct(int ProductId, ProductDTO ProductDTO);
+    public ValueTask<ResultObject<IProductDTO>> GetProductsAsync();
+    public ValueTask<ResultObject<IProductDTO>> GetProductByIdAsync(int idProduct);
+    public ValueTask InsertAsync(IProductDTO productDTO);
+    public ValueTask DeleteProductAsync(int ProductID);
+    public ValueTask UpdateProductAsync(int ProductId, IProductDTO ProductDTO);
 }

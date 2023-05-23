@@ -14,7 +14,7 @@
 - SQL Server for Linux 2019
 - MongoDB
 - Elasticsearch
--rabbitmq:3.8.34-management-alpine
+- Rabbitmq:3.8.34-management-alpine
 
 ## Prerequisites
 

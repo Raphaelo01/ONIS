@@ -6,4 +6,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\ONIS.Data.Order\ONIS.Data.Order.csproj" />
+    <ProjectReference Include="..\ONIS.Shared.Base\ONIS.Shared.Base.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -1,6 +1,6 @@
 ﻿namespace ONIS.Shared.Base.DTOs.Interfaces;
 
-public class IProductDTO
+public interface IProductDTO
 {
     public string? Name { get; set; }
 
